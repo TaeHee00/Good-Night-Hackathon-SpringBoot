@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Review {
 
     @Id
-    @Column(nullable = false, updatable = false, name = "review_id")
+    @Column(name = "review_id")
     private Long id;
 
     @Column(nullable = false, length = 300)

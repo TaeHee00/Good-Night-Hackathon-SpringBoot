@@ -13,15 +13,15 @@ import java.util.List;
 public class Restaurant {
 
     @Id
-    @Column(nullable = false, updatable = false, name = "restaurant_id")
+    @Column(name = "restaurant_id")
     private Long id;
 
     @Column(nullable = false, updatable = false, unique = true, length = 100)
     private String name;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private RestaurantCategory category;
 
     @OneToMany(mappedBy = "restaurant_id")
     private List<Review> reviews = new ArrayList<>();
