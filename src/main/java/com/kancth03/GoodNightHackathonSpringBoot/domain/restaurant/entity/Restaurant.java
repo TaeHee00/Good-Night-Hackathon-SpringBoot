@@ -25,4 +25,13 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant_id")
     private List<Review> reviews = new ArrayList<>();
+
+    private Restaurant(String name, RestaurantCategory category) {
+        this.name = name;
+        this.category = category;
+    }
+
+    public static Restaurant of(String name, RestaurantCategory category) {
+        return new Restaurant(name, category);
+    }
 }
