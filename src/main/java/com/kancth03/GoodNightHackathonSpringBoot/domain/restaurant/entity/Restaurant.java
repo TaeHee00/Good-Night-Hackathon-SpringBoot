@@ -19,6 +19,7 @@ import java.util.List;
 public class Restaurant {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_id")
     private Long id;
 
@@ -33,7 +34,7 @@ public class Restaurant {
     private List<Review> reviews = new ArrayList<>();
 
     @CreatedDate
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     private Restaurant(String name, RestaurantCategory category) {
         this.name = name;
