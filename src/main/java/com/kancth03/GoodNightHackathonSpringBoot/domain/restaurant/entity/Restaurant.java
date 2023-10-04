@@ -3,6 +3,7 @@ package com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.entity;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.review.entity.Review;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,8 +27,9 @@ public class Restaurant {
     @Column(nullable = false, updatable = false, unique = true, length = 100)
     private String name;
 
-    @Column(nullable = false)
+    @Setter
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private RestaurantCategory category;
 
     @OneToMany(mappedBy = "restaurant_id")
