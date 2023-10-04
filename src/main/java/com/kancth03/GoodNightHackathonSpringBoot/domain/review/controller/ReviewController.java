@@ -28,4 +28,10 @@ public class ReviewController {
                                              @RequestBody ModifyReviewRequest request) {
         return reviewService.modifyReview(reviewId, request);
     }
+
+    // 리뷰 삭제
+    @DeleteMapping("/{reviewId}")
+    public void deleteReview(@PathVariable Long reviewId) {
+        reviewService.deleteReview(reviewId);
+    }
 }

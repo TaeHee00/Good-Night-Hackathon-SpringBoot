@@ -39,4 +39,11 @@ public class ReviewService {
 
         return ModifyReviewResponse.entityToDto(reviewRepository.save(review));
     }
+
+    public void deleteReview(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("No review exists that matches Id."));
+
+        reviewRepository.delete(review);
+    }
 }
