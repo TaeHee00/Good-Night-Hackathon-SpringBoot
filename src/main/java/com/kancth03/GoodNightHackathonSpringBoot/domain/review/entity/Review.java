@@ -23,4 +23,14 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant_id;
+
+    private Review(String title, String content, Restaurant restaurant_id) {
+        this.title = title;
+        this.content = content;
+        this.restaurant_id = restaurant_id;
+    }
+
+    public static Review of(String title, String content, Restaurant restaurant_id) {
+        return new Review(title, content, restaurant_id);
+    }
 }
