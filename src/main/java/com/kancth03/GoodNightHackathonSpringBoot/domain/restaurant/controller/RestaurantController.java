@@ -44,4 +44,10 @@ public class RestaurantController {
         }
         return restaurantService.findRestaurantList();
     }
+
+    // 레스토랑 삭제
+    @DeleteMapping("/{id}")
+    public void deleteRestaurant(@PathVariable Long id) {
+        restaurantService.deleteRestaurant(id);
+    }
 }

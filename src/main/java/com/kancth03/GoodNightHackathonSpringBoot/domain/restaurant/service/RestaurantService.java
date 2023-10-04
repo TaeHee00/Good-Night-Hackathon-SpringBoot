@@ -62,4 +62,11 @@ public class RestaurantService {
                 .map(FindRestaurantResponse::entityToDto)
                 .toList();
     }
+
+    public void deleteRestaurant(Long id) {
+        Restaurant findRestaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No restaurant exists that matches Id."));
+
+        restaurantRepository.delete(findRestaurant);
+    }
 }
