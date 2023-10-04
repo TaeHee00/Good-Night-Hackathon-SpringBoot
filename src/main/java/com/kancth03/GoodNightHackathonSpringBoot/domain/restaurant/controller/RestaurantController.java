@@ -1,9 +1,6 @@
 package com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.controller;
 
-import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.AddRestaurantRequest;
-import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.AddRestaurantResponse;
-import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.ModifyCategoryRequest;
-import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.ModifyRestaurantResponse;
+import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.*;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,5 +24,11 @@ public class RestaurantController {
     @PutMapping("/{id}")
     public ModifyRestaurantResponse modifyCategory(@PathVariable Long id, @RequestBody ModifyCategoryRequest request) {
         return restaurantService.modifyRestaurantCategory(id, request);
+    }
+
+    // 레스토랑 단건 조회
+    @GetMapping("/{id}")
+    public FindRestaurantResponse findRestaurant(@PathVariable Long id) {
+        return restaurantService.findRestaurant(id);
     }
 }
