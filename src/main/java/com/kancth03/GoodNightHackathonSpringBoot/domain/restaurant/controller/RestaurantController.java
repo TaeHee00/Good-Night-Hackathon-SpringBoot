@@ -1,10 +1,13 @@
 package com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.controller;
 
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.*;
+import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.entity.RestaurantCategory;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/restaurant")
@@ -22,7 +25,8 @@ public class RestaurantController {
 
     // 레스토랑 카테고리 수정
     @PutMapping("/{id}")
-    public ModifyRestaurantResponse modifyCategory(@PathVariable Long id, @RequestBody ModifyCategoryRequest request) {
+    public ModifyRestaurantResponse modifyCategory(@PathVariable Long id,
+                                                   @RequestBody ModifyCategoryRequest request) {
         return restaurantService.modifyRestaurantCategory(id, request);
     }
 
@@ -30,5 +34,14 @@ public class RestaurantController {
     @GetMapping("/{id}")
     public FindRestaurantResponse findRestaurant(@PathVariable Long id) {
         return restaurantService.findRestaurant(id);
+    }
+
+    // 레스토랑 목록 조회
+    @GetMapping
+    public List<FindRestaurantResponse> findRestaurantList(@RequestParam(name = "category", required = false)RestaurantCategory category) {
+        if (category != null) {
+            return restaurantService.findRestaurantList(category);
+        }
+        return restaurantService.findRestaurantList();
     }
 }

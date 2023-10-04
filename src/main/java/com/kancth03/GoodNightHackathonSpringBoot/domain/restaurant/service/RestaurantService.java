@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -45,5 +46,20 @@ public class RestaurantService {
                 .orElseThrow(() -> new IllegalArgumentException("No restaurant exists that matches Id."));
 
         return FindRestaurantResponse.entityToDto(findRestaurant);
+    }
+
+    // 레스토랑 목록 조회 (카테고리)
+    public List<FindRestaurantResponse> findRestaurantList(RestaurantCategory category) {
+        return restaurantRepository.findAllByCategory(category)
+                .stream()
+                .map(FindRestaurantResponse::entityToDto)
+                .toList();
+    }
+    // 레스토랑 목록 조회 (전체)
+    public List<FindRestaurantResponse> findRestaurantList() {
+        return restaurantRepository.findAll()
+                .stream()
+                .map(FindRestaurantResponse::entityToDto)
+                .toList();
     }
 }
