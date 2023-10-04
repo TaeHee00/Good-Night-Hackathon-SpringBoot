@@ -2,6 +2,8 @@ package com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.service;
 
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.AddRestaurantRequest;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.AddRestaurantResponse;
+import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.ModifyCategoryRequest;
+import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.dto.ModifyRestaurantResponse;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.entity.Restaurant;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.entity.RestaurantCategory;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.repository.RestaurantRepository;
@@ -29,5 +31,15 @@ public class RestaurantService {
         }
 
         throw new Exception("Restaurant name is duplicated.");
+    }
+
+    public ModifyRestaurantResponse modifyRestaurantCategory(Long restaurantId, ModifyCategoryRequest request) {
+        // restaurantId에 해당하는 레스토랑이 있는지 확인
+        Restaurant findRestaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalArgumentException("No restaurant exists that matches Id."));
+
+        findRestaurant.setCategory(request.getCategory());
+        // 쿼리 확인을 위해 save 메서드를 사용하여 쿼리가 나가도록 함
+        return ModifyRestaurantResponse.entityToDto(restaurantRepository.save(findRestaurant));
     }
 }
