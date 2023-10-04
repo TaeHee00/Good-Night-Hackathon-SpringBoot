@@ -1,10 +1,14 @@
 package com.kancth03.GoodNightHackathonSpringBoot.domain.review.entity;
 
 import com.kancth03.GoodNightHackathonSpringBoot.domain.restaurant.entity.Restaurant;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table
 @Getter
@@ -15,8 +19,10 @@ public class Review {
     @Column(name = "review_id")
     private Long id;
 
+    @Setter
     @Column(nullable = false, length = 300)
     private String title;
+    @Setter
     @Column(nullable = false, length = 10000)
     private String content;
 
