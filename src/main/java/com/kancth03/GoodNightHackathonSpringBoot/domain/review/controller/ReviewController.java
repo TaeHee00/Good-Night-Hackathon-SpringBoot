@@ -1,12 +1,11 @@
 package com.kancth03.GoodNightHackathonSpringBoot.domain.review.controller;
 
-import com.kancth03.GoodNightHackathonSpringBoot.domain.review.dto.AddReviewRequest;
-import com.kancth03.GoodNightHackathonSpringBoot.domain.review.dto.AddReviewResponse;
-import com.kancth03.GoodNightHackathonSpringBoot.domain.review.dto.ModifyReviewRequest;
-import com.kancth03.GoodNightHackathonSpringBoot.domain.review.dto.ModifyReviewResponse;
+import com.kancth03.GoodNightHackathonSpringBoot.domain.review.dto.*;
 import com.kancth03.GoodNightHackathonSpringBoot.domain.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/review")
@@ -33,5 +32,17 @@ public class ReviewController {
     @DeleteMapping("/{reviewId}")
     public void deleteReview(@PathVariable Long reviewId) {
         reviewService.deleteReview(reviewId);
+    }
+
+    // 리뷰 단건 조회
+    @GetMapping("/{reviewId}")
+    public FindReviewResponse findReview(@PathVariable Long reviewId) {
+        return reviewService.findReview(reviewId);
+    }
+
+    // 리뷰 목록 조회
+    @GetMapping
+    public List<RestaurantReview> findReviewList() {
+        return reviewService.findReviewList();
     }
 }
